@@ -1,0 +1,17 @@
+.signUpWrapper {
+  width: 100%;
+  height: 100vh;
+  border: 1px solid skyblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .signUp {
+    max-width: 500px;
+    > * {
+      margin: 10px 0;
+    }
+    .signUpBtn {
+      width: 100%;
+    }
+  }
+}
