@@ -10,43 +10,40 @@ interface IndexState {
   user: any
 }
 
-class Index extends React.Component<IRouter> {
+class Index extends React.Component<IRouter,IndexState> {
   constructor(props: any) {
     super(props);
     this.state = {
       user: {}
     };
-    this.handleLogin = this.handleLogin.bind(this);
-    this.handleSignUp = this.handleSignUp.bind(this);
+    this.loginOut = this.loginOut.bind(this);
   }
 
   async componentWillMount() {
     await this.getMe();
   }
-  getMe = async () => {
-    try {
-      const response = await axios.get('me');
-      console.log(response);
-      this.setState({
-        user: response.data
-      })
-    }catch (e) {
-      console.error('获取用户失败');
-    }
-  }
-  handleLogin() {
-    this.props.history.push('/login');
-  }
 
-  handleSignUp() {
-    this.props.history.push('/signUp');
+  getMe = async () => {
+    //获取当前用户信息
+    const response = await axios.get('me');
+    this.setState({
+      user: response.data
+    });
+  };
+
+  loginOut() {
+    //注销
+    localStorage.setItem('x-token', '');
+    this.props.history.push('/login');
   }
 
   render() {
     return (
       <div className={'index'}>
-        <p>欢迎, {this.state.user && this.state.user.account}</p>
-        <Button onClick={this.handleLogin}>登录</Button>
+        <header>
+          <p>欢迎, {this.state.user && this.state.user.account}</p>
+          <Button onClick={this.loginOut}>注销</Button>
+        </header>
       </div>
     );
   }

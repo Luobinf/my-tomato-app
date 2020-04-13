@@ -10,7 +10,7 @@ interface UserLoginInfo {
   password: string
 }
 
-//第一个参数用于声明props，第二个参数用来声明state的
+//第一个参数用于声明props的类型的，第二个参数用来声明state的类型的
 class Login extends React.Component<any, UserLoginInfo> {
   constructor(props: any) {
     super(props);
@@ -29,12 +29,12 @@ class Login extends React.Component<any, UserLoginInfo> {
   submit = async () => {
     const {account, password} = this.state;
     try {
-      await axios.post('/sign_in/user', {
+      await axios.post('sign_in/user', {
         account,
         password
       });
       console.log('成功');
-      this.props.history.push('/index');  //跳转到首页
+      this.props.history.push('/');  //跳转到首页
     } catch (e) {
       throw new Error(e);
     }

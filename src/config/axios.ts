@@ -1,7 +1,8 @@
 import axios from 'axios';
+import history from './history';
 
-const appID = '你的app-id';
-const appSecret = '你的app-secret';
+const appID = 'dgWhuZttnnaAY54ZWqkb1PmY';
+const appSecret = 'CKBKfxbk3rJkgu8P529yYcqm';
 
 const instance = axios.create({
   baseURL: 'https://gp-server.hunger-valley.com/',
@@ -32,6 +33,11 @@ instance.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
   // Do something with response error
+  if(error.response.status === 401) {
+    //401未授权，重定向
+    //组件外如何跳转路由（无刷新）
+    history.push('/login');
+  }
   return Promise.reject(error);
 });
 
