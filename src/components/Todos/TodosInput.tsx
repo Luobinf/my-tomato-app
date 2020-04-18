@@ -20,11 +20,6 @@ class TodosInput extends React.Component<TodosInputProps,TodosInputState> {
   onKeyUp(e: any) {
     if(e.keyCode === 13 && this.state.description !== '') {
       this.addTodo();
-      this.setState({
-        description: ''
-      });
-    } else {
-      alert('请输入内容');
     }
   }
   addTodo() {
@@ -32,6 +27,9 @@ class TodosInput extends React.Component<TodosInputProps,TodosInputState> {
     console.log('add todo');
     this.props.addTodo({
       description: this.state.description
+    });
+    this.setState({
+      description: ''
     });
   }
   render() {
