@@ -1,5 +1,4 @@
 import React from 'react';
-import {Button} from 'antd';
 import axios from '../../config/axios';
 import history from '../../config/history';
 import { Menu, Dropdown } from 'antd';
@@ -85,7 +84,7 @@ class Home extends React.Component<IRouter,IndexState> {
           </div>
         </header>
         <main className='home-main'>
-          <Todos/>
+          <Todos />
         </main>
       </div>
     );

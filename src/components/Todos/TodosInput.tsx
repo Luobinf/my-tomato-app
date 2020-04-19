@@ -1,5 +1,9 @@
 import React from 'react';
 import { Input } from 'antd';
+// @ts-ignore
+import { connect } from 'react-redux';
+import { addTodo } from '../../redux/actions';
+import axios from '../../config/axios';
 import './TodosInput.scss';
 
 interface TodosInputState {
@@ -7,7 +11,7 @@ interface TodosInputState {
 }
 
 interface TodosInputProps {
-  addTodo: (params: any) => void
+  addTodo: (payload: any) => any
 }
 
 class TodosInput extends React.Component<TodosInputProps,TodosInputState> {
@@ -17,21 +21,28 @@ class TodosInput extends React.Component<TodosInputProps,TodosInputState> {
       description: ''
     };
   }
-  onKeyUp(e: any) {
-    if(e.keyCode === 13 && this.state.description !== '') {
+
+  handleChange = (e: { target: { value: any; }; }) => {
+    this.setState({description: e.target.value})
+  };
+
+  onPressEnter = () => {
+    if(this.state.description !== '') {
       this.addTodo();
     }
-  }
-  addTodo() {
-    // 发送请求，提交todo 这里输入框只负责展示，将请求交给父组件身去处理
-    console.log('add todo');
-    this.props.addTodo({
-      description: this.state.description
-    });
-    this.setState({
-      description: ''
-    });
-  }
+  };
+
+  addTodo = async () => {
+    //新增todo任务
+    try {
+      const response = await axios.post('todos',{description: this.state.description});
+      this.props.addTodo(response.data.resource);
+    } catch (e) {
+      throw new Error(e);
+    }
+    this.setState({description: ''});
+  };
+
   render() {
     const { description } = this.state;
     return (
@@ -39,12 +50,22 @@ class TodosInput extends React.Component<TodosInputProps,TodosInputState> {
         <Input
           placeholder="添加新任务"
           value={description}
-          onChange={(e) => this.setState({description: e.target.value})}
-          onKeyUp={this.onKeyUp.bind(this)}
+          onChange={this.handleChange}
+          onPressEnter={this.onPressEnter}
         />
       </div>
     )
   }
 }
 
-export default TodosInput;
+const mapStateToProps = (state: any, ownProps: any) => {
+  return {
+    ...ownProps
+  }
+};
+
+const mapDispatchToProps = {
+  addTodo
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodosInput);
