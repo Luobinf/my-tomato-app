@@ -5,6 +5,7 @@ import { Menu, Dropdown } from 'antd';
 import { DownOutlined, UserOutlined } from '@ant-design/icons';
 import './Home.scss';
 import Todos from '../Todos/Todos';
+import Tomatoes from '../Tomatoes/Tomatoes';
 
 interface IRouter {
   history: any
@@ -84,6 +85,7 @@ class Home extends React.Component<IRouter,IndexState> {
           </div>
         </header>
         <main className='home-main'>
+          <Tomatoes />
           <Todos />
         </main>
       </div>
