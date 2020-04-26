@@ -3,7 +3,7 @@ import { Checkbox, Input, Tooltip } from 'antd';
 import { DeleteOutlined, EnterOutlined} from '@ant-design/icons';
 // @ts-ignore
 import { connect } from 'react-redux';
-import { editTodo, updateTodos } from '../../redux/actions';
+import { editTodo, updateTodos } from '../../redux/actions/todos';
 import './TodoItem.scss';
 import axios from '../../config/axios';
 

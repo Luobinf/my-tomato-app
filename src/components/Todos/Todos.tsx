@@ -1,7 +1,7 @@
 import React from 'react';
 // @ts-ignore
 import {connect} from 'react-redux';
-import {initTodos, updateTodos, editTodo} from '../../redux/actions';
+import {initTodos, updateTodos, editTodo} from '../../redux/actions/todos';
 import axios from '../../config/axios';
 import TodosInput from './TodosInput';
 import TodoItem from './TodoItem';

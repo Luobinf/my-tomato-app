@@ -2,7 +2,7 @@ import React from 'react';
 import { Input } from 'antd';
 // @ts-ignore
 import { connect } from 'react-redux';
-import { addTodo } from '../../redux/actions';
+import { addTodo } from '../../redux/actions/todos';
 import axios from '../../config/axios';
 import './TodosInput.scss';
 
