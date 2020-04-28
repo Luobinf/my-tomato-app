@@ -1,0 +1,14 @@
+.countdown {
+  position: relative;
+  background: rgb(248, 248, 248);
+  z-index: 1;
+  .process {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    background: linear-gradient(to bottom,#F8F8F8 0,#EEE 100%);
+    z-index: -1;
+  }
+}

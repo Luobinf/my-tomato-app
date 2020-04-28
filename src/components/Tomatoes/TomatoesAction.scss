@@ -1,0 +1,30 @@
+.start-tomato-btn-wrapper {
+  .countdown-wrapper {
+    position: relative;
+    .close {
+      position: absolute;
+      left: 100%;
+      transform: translate(-50%,-50%);
+      background: #f8f8f8;
+      z-index: 10;
+    }
+    .countdown {
+      height: 40px;
+      border: 1px solid #9C9C97;
+      padding: 8px 0;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      border-radius: 4px;
+      text-align: center;
+    }
+    .input {
+      height: 40px;
+    }
+  }
+  .start-tomato-btn {
+    width: 100%;
+    //background: rgb(244,244,244);
+    height: 40px;
+    border-radius: 4px;
+  }
+}

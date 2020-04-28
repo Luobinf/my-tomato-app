@@ -56,6 +56,14 @@ class TomatoesAction extends React.Component<TomatoesButtonProps,TomatoesButtonS
     }
   };
 
+  abortTomato = async () => {
+    try {
+
+    } catch (e) {
+
+    }
+  };
+
   render() {
     const { startTomato, unfinishedTomato } = this.props;
     let html = <div/>;
@@ -67,19 +75,25 @@ class TomatoesAction extends React.Component<TomatoesButtonProps,TomatoesButtonS
       const timeNow = new Date().getTime();
       if(timeNow - startedAt > duration) {
         html = (
-          <div>
+          <div className='countdown-wrapper'>
             <Input
               placeholder='请输入刚刚完成的任务'
               value={this.state.description}
               onChange={this.handleChange}
               onPressEnter={this.handlePressEnter}
+              className='input'
             />
-            <CloseCircleOutlined />
+            <CloseCircleOutlined className='close' />
           </div>
         );
       } else if(timeNow - startedAt < duration ){
         const timer = duration - (timeNow - startedAt);
-        html = <CountDown timer={timer} onFinish={this.onFinish} />  //倒计时
+        html = (
+          <div className='countdown-wrapper'>
+            <CloseCircleOutlined className='close' />
+            <CountDown timer={timer} onFinish={this.onFinish} duration={duration} />
+          </div>
+        );  //倒计时
       }
     }
     return (

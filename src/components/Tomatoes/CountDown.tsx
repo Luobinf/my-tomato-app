@@ -1,7 +1,9 @@
 import React from 'react';
+import './CountDown.scss';
 
 interface CountDownProps {
   timer: number,
+  duration: number,
   onFinish: () => void
 }
 
@@ -41,6 +43,8 @@ class CountDown extends React.Component<CountDownProps, CountDownStates> {
 
   render() {
     //倒计时功能需要完善一下。
+    let percent = 1 - this.state.countDown / this.props.duration;
+    console.log(percent);
     console.log(this.state.countDown);
     let minutes = Math.floor(this.state.countDown / 1000 / 60);
     let seconds = Math.floor(this.state.countDown / 1000 % 60);
@@ -48,6 +52,9 @@ class CountDown extends React.Component<CountDownProps, CountDownStates> {
     return (
       <div className='countdown'>
         {minutes} : {seconds}
+        <div className="process" style={{width: `${percent * 100}%`}}>
+
+        </div>
       </div>
     );
   }
