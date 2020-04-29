@@ -5,7 +5,8 @@ import { Menu, Dropdown } from 'antd';
 import { DownOutlined, UserOutlined } from '@ant-design/icons';
 import './Home.scss';
 import Todos from '../Todos/Todos';
-import Tomatoes from '../Tomatoes/Tomatoes';
+// import Tomatoes from '../Tomatoes/Tomatoes';
+import Tomatoes from '../left/Tomatoes/Tomatoes';
 
 interface IRouter {
   history: any
