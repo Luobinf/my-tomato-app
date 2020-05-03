@@ -32,6 +32,9 @@ class TodoItem extends React.Component<TodoItemProps>{
   };
 
   updateTodo = async (params:any) => {
+      if(params.completed) {
+          params['completed_at'] = new Date();
+      }
     const id = this.props.id;
     try {
       // 不管是将todo删除还是完成，返回操作的某一个todo时，仍然将其放入到原有的todo列表中。

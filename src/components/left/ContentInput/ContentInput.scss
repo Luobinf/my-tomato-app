@@ -1,0 +1,46 @@
+.content-input {
+  width: 100%;
+  .countdown-wrapper {
+    box-sizing: border-box;
+    height: 40px;
+    position: relative;
+    .start-btn {
+      width: 100%;
+      height: 100%;
+    }
+    .input {
+      width: 100%;
+      height: 100%;
+    }
+    .close {
+      position: absolute;
+      right: 0;
+      bottom: 100%;
+      transform: translate3d(50%,50%,0);
+      background-color: white;
+      cursor: pointer;
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+    .enter {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translate3d(0,-50%,0);
+      cursor: pointer;
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+    .countdown {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid rgb(204,204,204);
+    }
+  }
+}

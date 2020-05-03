@@ -7,6 +7,7 @@ import './Home.scss';
 import Todos from '../Todos/Todos';
 // import Tomatoes from '../Tomatoes/Tomatoes';
 import Tomatoes from '../left/Tomatoes/Tomatoes';
+import Statistics from '../Statistics/Statistics';
 
 interface IRouter {
   history: any
@@ -89,6 +90,7 @@ class Home extends React.Component<IRouter,IndexState> {
           <Tomatoes />
           <Todos />
         </main>
+          <Statistics/>
       </div>
     );
   }

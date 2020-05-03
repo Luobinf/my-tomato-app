@@ -38,16 +38,14 @@ class Tomatoes extends React.Component<TomatoesProps> {
       return t.description && t.ended_at && !t.aborted;
     })[0];
     const obj = _.groupBy(finishedTomatoes,(tomato) => {
-      return format(tomato.started_at,'YYYY-MM-D')
-    });
-    return obj
+          return format(tomato.started_at,'YYYY-MM-D')
+      });
+      return obj
   }
 
   getTomatoes = async () => {
     try {
       const response = await axios.get('tomatoes');
-      console.log(response.data.resources);
-      console.log(12222);
       this.props.initTomatoes(response.data.resources); //初始化番茄
     }catch (e) {
       throw new Error(e);
@@ -71,9 +69,9 @@ class Tomatoes extends React.Component<TomatoesProps> {
          unfinishedTomato={this.unfinishedTomato}
          updateTomato={this.props.updateTomato}
        />
-       {/*<TomatoList*/}
-       {/*  finishedTomatoes={this.finishedTomatoes}*/}
-       {/*/>*/}
+       <TomatoList
+         finishedTomatoes={this.finishedTomatoes}
+       />
       </div>
     );
   }
