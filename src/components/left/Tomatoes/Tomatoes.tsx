@@ -11,7 +11,9 @@ import _ from 'lodash';
 
 
 interface TomatoesProps {
-
+  tomatoes: any[],
+  startTomato: () => void,
+  updateTomatoes: (param1:number,param2:any) => Promise<boolean> | undefined
 }
 
 interface TomatoesState {
@@ -21,50 +23,17 @@ interface TomatoesState {
 class Tomatoes extends React.Component<TomatoesProps, TomatoesState> {
   constructor(props: Readonly<TomatoesProps>) {
     super(props);
-    this.state = {
-      tomatoes: []
-    };
   }
-
-  componentDidMount() {
-    this.getAllTomatoes();
-  }
-
-  getAllTomatoes = async () => {
-    try {
-      const response = await axios.get('tomatoes');
-      this.setState({
-        tomatoes: response.data.resources
-      });
-    } catch (e) {
-      throw new Error('无法获取所有的番茄');
-    }
-  };
-
-  startTomato = async () => {
-    try {
-      const response = await axios.post('tomatoes', {duration: 60 * 1000 * 3});
-      let tomato = response.data.resource;
-      let tomatoes = this.state.tomatoes;
-      tomatoes.push(tomato);
-      this.setState({
-        tomatoes
-      });
-    } catch (e) {
-      throw new Error(e);
-    }
-  };
 
   get unfinishedTomatoes() {
-    const {tomatoes} = this.state;
-    let unfinishedTomatoes = tomatoes.filter(tomato => {
+    const { tomatoes } = this.props;
+    return tomatoes.filter(tomato => {
       return !tomato.description && !tomato.ended_at && !tomato.aborted;
     })[0];
-    return unfinishedTomatoes;
   }
 
   get finishedTomatoes() {
-    const {tomatoes} = this.state;
+    const { tomatoes } = this.props;
     let finishedTomatoes = tomatoes.filter(tomato => {
       return tomato.created_at && tomato.ended_at && !tomato.aborted;
     });
@@ -89,49 +58,25 @@ class Tomatoes extends React.Component<TomatoesProps, TomatoesState> {
       data = finishedTomatoes;
     }
     return data.slice(0, 3);  //只展示三天的番茄
-
   }
 
   get abortedTomatoes() {
-    const {tomatoes} = this.state;
+    const { tomatoes } = this.props;
     return tomatoes.filter(tomato => {
       return tomato.aborted;
     });
   }
 
-  updateTomatoes = async (id: number, info: any) => {
-    try {
-      const response = await axios.put(`tomatoes/${id}`, {
-        ...info
-      });
-      // console.log('更新之前的番茄',this.state.tomatoes);
-      let tomatoes = this.state.tomatoes.map(tomato => {
-        if (id === tomato.id) {
-          return response.data.resource;
-        } else {
-          return tomato;
-        }
-      });
-      // console.log('更新番茄',tomatoes);
-      this.setState({
-        tomatoes
-      });
-      return true;
-    } catch (e) {
-      throw new Error(e);
-    }
-  };
-
   render() {
-    console.log('所有番茄', this.state.tomatoes);
+    console.log('所有番茄', this.props.tomatoes);
     console.log('已经完成的番茄', this.finishedTomatoes);
     console.log('被中断的番茄', this.abortedTomatoes);
     return (
       <div className='tomatoes'>
         <ContentInput
           unfinishedTomatoes={this.unfinishedTomatoes}
-          startTomato={this.startTomato}
-          updateTomatoes={this.updateTomatoes}
+          startTomato={this.props.startTomato}
+          updateTomatoes={this.props.updateTomatoes}
         />
         <TaskList finishedTomatoes={this.finishedTomatoes}/>
       </div>

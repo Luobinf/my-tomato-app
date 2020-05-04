@@ -14,14 +14,16 @@ interface IRouter {
 }
 
 interface IndexState {
-  user: any
+  user: any,
+  tomatoes: any[]
 }
 
 class Home extends React.Component<IRouter,IndexState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      user: {}
+      user: {},
+      tomatoes: []
     };
     this.loginOut = this.loginOut.bind(this);
   }
@@ -44,12 +46,65 @@ class Home extends React.Component<IRouter,IndexState> {
     this.props.history.push('/login');
   }
 
-  render() {
-    function handleMenuClick() {
-      console.log(121212);
+  handleMenuClick = () => {
+    console.log(12);
+  };
+
+
+  getAllTomatoes = async () => {
+    try {
+      const response = await axios.get('tomatoes');
+      this.setState({
+        tomatoes: response.data.resources
+      });
+    } catch (e) {
+      throw new Error('无法获取所有的番茄');
     }
+  };
+
+  startTomato = async () => {
+    try {
+      const response = await axios.post('tomatoes', {duration: 60 * 1000 * 3});
+      let tomato = response.data.resource;
+      let tomatoes = this.state.tomatoes;
+      tomatoes.push(tomato);
+      this.setState({
+        tomatoes
+      });
+    } catch (e) {
+      throw new Error(e);
+    }
+  };
+
+  updateTomatoes = async (id: number, info: any) => {
+    try {
+      const response = await axios.put(`tomatoes/${id}`, {
+        ...info
+      });
+      // console.log('更新之前的番茄',this.state.tomatoes);
+      let tomatoes = this.state.tomatoes.map(tomato => {
+        if (id === tomato.id) {
+          return response.data.resource;
+        } else {
+          return tomato;
+        }
+      });
+      this.setState({
+        tomatoes
+      });
+      return true;
+    } catch (e) {
+      throw new Error(e);
+    }
+  };
+
+  componentDidMount () {
+    this.getAllTomatoes();
+  }
+
+  render() {
     const menu = (
-      <Menu onClick={handleMenuClick}>
+      <Menu onClick={this.handleMenuClick}>
         <Menu.Item key="1">
           <UserOutlined />
           账号
@@ -73,13 +128,14 @@ class Home extends React.Component<IRouter,IndexState> {
         </Dropdown>
       </div>
     );
+    // @ts-ignore
     return (
       <div className='home'>
         <header>
           <div className='nav'>
             <div className='logo'>
               <svg className="icon" aria-hidden="true">
-                <use xlinkHref="#icon-tomato"></use>
+                <use xlinkHref="#icon-tomato"/>
               </svg>
               <h2 className='title'>番茄时间</h2>
             </div>
@@ -87,7 +143,11 @@ class Home extends React.Component<IRouter,IndexState> {
           </div>
         </header>
         <main className='home-main'>
-          <Tomatoes />
+          <Tomatoes
+            tomatoes={this.state.tomatoes}
+            startTomato={this.startTomato}
+            updateTomatoes={this.updateTomatoes}
+          />
           <Todos />
         </main>
           <Statistics/>
