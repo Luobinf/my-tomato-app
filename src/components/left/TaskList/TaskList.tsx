@@ -33,7 +33,7 @@ class TaskList extends React.Component<TaskListProps> {
           return (
             <div className='tomato'>
               <div className='head'>
-                <span className='date'>{key}</span>
+                <span className='date'>{format(new Date(key).getTime(),'yyyy-MM-dd')}</span>
                 {tomato[key].length > 0 ? <span className='count'>完成了个{tomato[key].length}番茄</span> : null}
               </div>
               {

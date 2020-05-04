@@ -68,7 +68,6 @@ class Tomatoes extends React.Component<TomatoesProps, TomatoesState> {
     let finishedTomatoes = tomatoes.filter(tomato => {
       return tomato.created_at && tomato.ended_at && !tomato.aborted;
     });
-    // console.log(finishedTomatoes);
     let sortedData;
     let data = [];
     if (finishedTomatoes && finishedTomatoes.length > 1) {
@@ -78,19 +77,18 @@ class Tomatoes extends React.Component<TomatoesProps, TomatoesState> {
       });
       data.push(_.groupBy(sortedData, (tomato) => {
         let time = new Date(tomato.started_at).getTime();
-        return format(time, 'yyyy-MM-d');
+        return format(time, 'yyyy-MM-dd');
       }));
     } else if (finishedTomatoes.length === 1) {
       data.push(_.groupBy(finishedTomatoes, (tomato) => {
         console.log('tomato', tomato);
         let time = new Date(tomato.started_at).getTime();
-        return format(time, 'yyyy-MM-d');
+        return format(time, 'yyyy-MM-dd');
       }));
     } else {
       data = finishedTomatoes;
     }
-    // console.log('完成的番茄',data);
-    return data.slice(0, 3);
+    return data.slice(0, 3);  //只展示三天的番茄
 
   }
 
