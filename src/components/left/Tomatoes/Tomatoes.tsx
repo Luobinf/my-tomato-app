@@ -2,7 +2,6 @@ import React from 'react';
 import ContentInput from '../ContentInput/ContentInput';
 import TaskList from '../TaskList/TaskList';
 import './Tomatoes.scss';
-import axios from '../../../config/axios';
 import {format} from 'date-fns';
 import _ from 'lodash';
 

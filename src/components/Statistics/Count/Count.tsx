@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import _ from 'lodash';
 import {format} from 'date-fns';
 import {Tabs} from 'antd';
-import StatisticChart from '../Charts/StatisticChart';
+// import StatisticChart from '../Charts/StatisticChart';
 
 const TabPane = Tabs.TabPane;
 
@@ -90,7 +90,6 @@ class Count extends React.Component<TodosHistoryProps> {
                   {this.dailyFinishedTodos[date].length > 0 ?
                     <span className='count'>完成了{this.dailyFinishedTodos[date].length}个任务</span> : null}
                 </div>
-                <StatisticChart/>
                 <div className='content'>
                   {
                     this.dailyFinishedTodos[date].map(todo => <TodoItem todo={todo} key={todo.id}/>)

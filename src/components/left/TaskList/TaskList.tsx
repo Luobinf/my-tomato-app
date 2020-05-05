@@ -25,7 +25,6 @@ class TaskList extends React.Component<TaskListProps> {
 
   render() {
     const {finishedTomatoes} = this.props;
-    console.log(finishedTomatoes);
     let tomatoesDOM;
     if (finishedTomatoes.length > 0) {
       tomatoesDOM = finishedTomatoes.map(tomato => {
@@ -34,7 +33,7 @@ class TaskList extends React.Component<TaskListProps> {
             <div className='tomato'>
               <div className='head'>
                 <span className='date'>{format(new Date(key).getTime(),'yyyy-MM-dd')}</span>
-                {tomato[key].length > 0 ? <span className='count'>完成了个{tomato[key].length}番茄</span> : null}
+                {tomato[key].length > 0 ? <span className='count'>完成了{tomato[key].length}个番茄</span> : null}
               </div>
               {
                 tomato[key].map((item: any) => {
