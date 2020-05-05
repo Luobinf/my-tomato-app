@@ -5,7 +5,6 @@ import { Menu, Dropdown } from 'antd';
 import { DownOutlined, UserOutlined } from '@ant-design/icons';
 import './Home.scss';
 import Todos from '../Todos/Todos';
-// import Tomatoes from '../Tomatoes/Tomatoes';
 import Tomatoes from '../left/Tomatoes/Tomatoes';
 import Statistics from '../Statistics/Statistics';
 
@@ -64,7 +63,7 @@ class Home extends React.Component<IRouter,IndexState> {
 
   startTomato = async () => {
     try {
-      const response = await axios.post('tomatoes', {duration: 60 * 1000 * 3});
+      const response = await axios.post('tomatoes', {duration: 60 * 1000 * 3});  //设置闹钟时长
       let tomato = response.data.resource;
       let tomatoes = this.state.tomatoes;
       tomatoes.push(tomato);
@@ -103,6 +102,7 @@ class Home extends React.Component<IRouter,IndexState> {
   }
 
   render() {
+    console.log(9999999999999,this.state.tomatoes);
     const menu = (
       <Menu onClick={this.handleMenuClick}>
         <Menu.Item key="1">
@@ -150,7 +150,7 @@ class Home extends React.Component<IRouter,IndexState> {
           />
           <Todos />
         </main>
-          <Statistics/>
+          <Statistics tomatoes={this.state.tomatoes}/>
       </div>
     );
   }

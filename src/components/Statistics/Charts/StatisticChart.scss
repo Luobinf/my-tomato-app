@@ -1,0 +1,19 @@
+#chart {
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  .head {
+    padding: 10px 10px 0 10px;
+    .count {
+      font-size: 30px;
+      color: rgb(51,51,51);
+      font-weight: 500;
+    }
+    .all {
+      font-size: 20px;
+      margin-left: 5px;
+    }
+  }
+  .body {
+
+  }
+}
