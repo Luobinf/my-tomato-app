@@ -6,6 +6,9 @@ import axios from '../../config/axios';
 import TodosInput from './TodosInput';
 import TodoItem from './TodoItem';
 import './Todos.scss';
+import { Collapse } from 'antd';
+
+const { Panel } = Collapse;
 
 //表示todos是一个数组，数组里面可以是任何东西
 interface TodosState {
@@ -65,34 +68,27 @@ class Todos extends React.Component<any, TodosState> {
       <div className='todos'>
         <TodosInput/>
         <div className='todoLists'>
-          <div>
+          <div className='task'>
             {
               this.unCompletedTodos.map((item: any) => {
                 return (
-                  <TodoItem key={item.id} {...item}/>
+                  <TodoItem key={item.id} {...item} descriptionSituation={'完成任务'} />
                 );
               })
             }
           </div>
           <div>
-            <h4>已完成的任务</h4>
-            {
-              this.completedTodos.map((item: any) => {
-                return (
-                  <TodoItem key={item.id} {...item}/>
-                );
-              })
-            }
-          </div>
-          <div>
-            <h4>已删除的任务</h4>
-            {
-              this.deletedTodos.map((item: any) => {
-                return (
-                  <TodoItem key={item.id} {...item}/>
-                );
-              })
-            }
+            <Collapse className='finishedTasks'>
+              <Panel header="最近完成的任务" key="1">
+                {
+                  this.completedTodos.map((item: any) => {
+                    return (
+                      <TodoItem key={item.id} {...item} descriptionSituation={'删除任务'} />
+                    );
+                  })
+                }
+              </Panel>
+            </Collapse>
           </div>
         </div>
       </div>

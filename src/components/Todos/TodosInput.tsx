@@ -52,6 +52,7 @@ class TodosInput extends React.Component<TodosInputProps,TodosInputState> {
           value={description}
           onChange={this.handleChange}
           onPressEnter={this.onPressEnter}
+          className='input'
         />
       </div>
     )

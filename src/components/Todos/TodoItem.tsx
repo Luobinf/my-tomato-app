@@ -1,9 +1,9 @@
 import React from 'react';
-import { Checkbox, Input, Tooltip } from 'antd';
-import { DeleteOutlined, EnterOutlined} from '@ant-design/icons';
+import {Checkbox, Input, Tooltip} from 'antd';
+import {DeleteOutlined, EnterOutlined} from '@ant-design/icons';
 // @ts-ignore
-import { connect } from 'react-redux';
-import { editTodo, updateTodos } from '../../redux/actions/todos';
+import {connect} from 'react-redux';
+import {editTodo, updateTodos} from '../../redux/actions/todos';
 import './TodoItem.scss';
 import axios from '../../config/axios';
 
@@ -16,10 +16,11 @@ interface TodoItemProps {
   editing: boolean,
   updateTodos: (params: any) => void,
   editTodo: (id: number) => any,
-  deleteTodo: (id: number,params?: any) => any
+  deleteTodo: (id: number, params?: any) => any,
+  descriptionSituation: string
 }
 
-class TodoItem extends React.Component<TodoItemProps>{
+class TodoItem extends React.Component<TodoItemProps> {
   constructor(props: Readonly<TodoItemProps>) {
     super(props);
   }
@@ -31,16 +32,16 @@ class TodoItem extends React.Component<TodoItemProps>{
     });
   };
 
-  updateTodo = async (params:any) => {
-      if(params.completed) {
-          params['completed_at'] = new Date();
-      }
+  updateTodo = async (params: any) => {
+    if (params.completed) {
+      params['completed_at'] = new Date();
+    }
     const id = this.props.id;
     try {
       // 不管是将todo删除还是完成，返回操作的某一个todo时，仍然将其放入到原有的todo列表中。
-      const response = await axios.put(`/todos/${id}`,params);
+      const response = await axios.put(`/todos/${id}`, params);
       this.props.updateTodos(response.data.resource);
-    }catch (e) {
+    } catch (e) {
       throw new Error(e);
     }
   };
@@ -54,28 +55,28 @@ class TodoItem extends React.Component<TodoItemProps>{
   };
 
   handlePressEnter = (e: any) => {
-    if(e.target.value !== '') {
+    if (e.target.value !== '') {
       this.updateTodo({description: e.target.value});
     }
   };
 
   render() {
-    const { description, completed, editing } = this.props;
+    const {description, completed, editing} = this.props;
     // @ts-ignore
     const editInput = (
       <div className='input'>
-        <Input type="text" defaultValue={description} onPressEnter={this.handlePressEnter} />
+        <Input type="text" defaultValue={description} onPressEnter={this.handlePressEnter}/>
         <div className='icon-wrapper'>
           <Tooltip placement="topLeft" title='按回车键提交'>
-            <EnterOutlined className='enter' />
+            <EnterOutlined className='enter'/>
           </Tooltip>
           <Tooltip placement="bottomLeft" title='点击删除任务'>
-            <DeleteOutlined className='delete' onClick={this.deleteTodo} />
+            <DeleteOutlined className='delete' onClick={this.deleteTodo}/>
           </Tooltip>
         </div>
       </div>
     );
-    const spanContent =  <span onDoubleClick={this.edit} className='desc'>{description}</span>;
+    const spanContent = <span onDoubleClick={this.edit} className='desc'>{description}</span>;
     const contentClass = classNames({
       content: true,
       editing,
@@ -85,7 +86,9 @@ class TodoItem extends React.Component<TodoItemProps>{
       <div className='todoItem'>
         <div className={contentClass}>
           <div className='box'>
-            <Checkbox onChange={this.handleChange} checked={completed} />
+            <Tooltip placement="top" title={this.props.descriptionSituation}>
+              <Checkbox onChange={this.handleChange} checked={completed}/>
+            </Tooltip>
           </div>
           {
             editing ? editInput : spanContent
@@ -100,7 +103,7 @@ const mapStateToProps = (state: { todos: any; }, ownProps: any) => {
   return {
     todos: state.todos,
     ...ownProps
-  }
+  };
 };
 
 const mapDispatchToProps = {
@@ -108,4 +111,4 @@ const mapDispatchToProps = {
   updateTodos
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(TodoItem);
+export default connect(mapStateToProps, mapDispatchToProps)(TodoItem);
