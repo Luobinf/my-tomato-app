@@ -1,5 +1,8 @@
 .task-list {
   margin-top: 20px;
+  .ant-collapse .ant-collapse-item .ant-collapse-header {
+    padding: 6px 16px 6px 40px;
+  }
   .tomato {
     color: rgb(153,153,153);
     font-size: 16px;

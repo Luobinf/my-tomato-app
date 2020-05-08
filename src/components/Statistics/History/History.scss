@@ -1,8 +1,11 @@
-.todos-history {
-  margin-bottom: 200px;
+.history {
   padding: 16px;
   border: 1px solid #dddddd;
   border-radius: 8px;
+  //display: none;
+  &.active {
+    display: block;
+  }
   .todoItem {
     display: flex;
     padding: 14px;
