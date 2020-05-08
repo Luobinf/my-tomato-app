@@ -7,6 +7,8 @@ import './Home.scss';
 import Todos from '../Todos/Todos';
 import Tomatoes from '../left/Tomatoes/Tomatoes';
 import Statistics from '../Statistics/Statistics';
+import Footer from '../Footer/Footer';
+import Progress from '../Progress/Progress';
 
 interface IRouter {
   history: any
@@ -150,7 +152,9 @@ class Home extends React.Component<IRouter,IndexState> {
           />
           <Todos />
         </main>
-          <Statistics tomatoes={this.state.tomatoes}/>
+        <Statistics tomatoes={this.state.tomatoes}/>
+        <Footer/>
+        <Progress/>
       </div>
     );
   }
