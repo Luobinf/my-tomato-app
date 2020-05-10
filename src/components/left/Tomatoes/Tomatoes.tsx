@@ -12,7 +12,7 @@ import _ from 'lodash';
 interface TomatoesProps {
   tomatoes: any[],
   startTomato: () => void,
-  updateTomatoes: (param1:number,param2:any) => Promise<boolean> | undefined
+  updateTomatoes: (param1:number,param2:any) => Promise<boolean> | undefined,
 }
 
 interface TomatoesState {
@@ -59,17 +59,10 @@ class Tomatoes extends React.Component<TomatoesProps, TomatoesState> {
     return data.slice(0, 3);  //只展示三天的番茄
   }
 
-  get abortedTomatoes() {
-    const { tomatoes } = this.props;
-    return tomatoes.filter(tomato => {
-      return tomato.aborted;
-    });
-  }
-
   render() {
-    console.log('所有番茄', this.props.tomatoes);
-    console.log('已经完成的番茄', this.finishedTomatoes);
-    console.log('被中断的番茄', this.abortedTomatoes);
+    // console.log('所有番茄', this.props.tomatoes);
+    // console.log('已经完成的番茄', this.finishedTomatoes);
+    // console.log('被中断的番茄', this.abortedTomatoes);
     return (
       <div className='tomatoes'>
         <ContentInput

@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from '../../config/axios';
-import {Menu, Dropdown, Tooltip} from 'antd';
+import {Menu, Dropdown, Tooltip, Modal, InputNumber, message} from 'antd';
 import {DownOutlined, UserOutlined} from '@ant-design/icons';
 import './Home.scss';
 import Todos from '../Todos/Todos';
@@ -11,7 +11,6 @@ import Progress from '../Progress/Progress';
 //@ts-ignore
 import {connect} from 'react-redux';
 import {initTodos, updateTodos, editTodo} from '../../redux/actions/todos';
-import {CloseCircleOutlined} from '@ant-design/icons/lib';
 
 interface IndexProps {
   history: any,
@@ -21,7 +20,9 @@ interface IndexProps {
 
 interface IndexState {
   user: any,
-  tomatoes: any[]
+  tomatoes: any[],
+  modalVisible: boolean,
+  tomatoDuration: number
 }
 
 class Home extends React.Component<IndexProps, IndexState> {
@@ -31,7 +32,9 @@ class Home extends React.Component<IndexProps, IndexState> {
     super(props);
     this.state = {
       user: {},
-      tomatoes: []
+      tomatoes: [],
+      modalVisible: false,
+      tomatoDuration: 25 * 60 * 1000
     };
     this.loginOut = this.loginOut.bind(this);
     this.refresh = React.createRef();
@@ -55,11 +58,6 @@ class Home extends React.Component<IndexProps, IndexState> {
     localStorage.setItem('x-token', '');
     this.props.history.push('/login');
   }
-
-  handleMenuClick = () => {
-    console.log(12);
-  };
-
 
   getAllTomatoes = async () => {
     try {
@@ -86,7 +84,7 @@ class Home extends React.Component<IndexProps, IndexState> {
 
   startTomato = async () => {
     try {
-      const response = await axios.post('tomatoes', {duration: 60 * 1000 * 3});  //设置闹钟时长
+      const response = await axios.post('tomatoes', {duration: this.state.tomatoDuration});  //设置番茄时长
       let tomato = response.data.resource;
       let tomatoes = this.state.tomatoes;
       tomatoes.push(tomato);
@@ -120,6 +118,38 @@ class Home extends React.Component<IndexProps, IndexState> {
     }
   };
 
+  handleSettings = () => {
+    this.setState({
+      modalVisible: true
+    });
+  };
+
+  handleOk = () => {
+    console.log(55555555);
+    this.setState({
+      modalVisible: false
+    });
+    message.success('设置成功！！！');
+  };
+
+  handleCancel = () => {
+    console.log(11);
+    this.setState({
+      modalVisible: false
+    });
+  };
+
+  handleTomatoDuration = (value: any) => {
+    console.log(value);
+    if(typeof value === 'number' && value >= 10 && value <= 60) {
+      this.setState({
+        tomatoDuration: value * 60 * 1000
+      });
+    } else {
+      message.error('您的输入有误！！！');
+    }
+  };
+
   componentDidMount() {
     let p1 = this.getAllTomatoes();
     let p2 = this.getTodos();
@@ -136,17 +166,32 @@ class Home extends React.Component<IndexProps, IndexState> {
   render() {
     // console.log(9999999999999,this.state.tomatoes);
     // console.log(9999999999999,this.props.todos);
+    const { modalVisible } = this.state;
+    const modalDOM = (
+      <Modal
+        visible={modalVisible}
+        onOk={this.handleOk}
+        onCancel={this.handleCancel}
+        centered={true}
+        className="modal"
+      >
+        <div className="duration-wrapper">
+          <div className="duration">
+            <span className="title">设置番茄时长: </span>
+            <InputNumber min={10} max={60} defaultValue={25} onChange={this.handleTomatoDuration} />
+          </div>
+          <span className="number">请输入10 — 60之间的数字</span>
+        </div>
+      </Modal>
+    );
     const menu = (
-      <Menu onClick={this.handleMenuClick}>
-        <Menu.Item key="1">
-          <UserOutlined/>
-          账号
-        </Menu.Item>
-        <Menu.Item key="2">
-          <UserOutlined/>
+      <Menu>
+        <Menu.Item key="1" onClick={this.handleSettings}>
+          <UserOutlined />
           偏好设置
         </Menu.Item>
-        <Menu.Item key="3" onClick={this.loginOut}>
+        {modalDOM}
+        <Menu.Item key="2" onClick={this.loginOut}>
           <UserOutlined/>
           注销
         </Menu.Item>

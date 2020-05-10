@@ -71,3 +71,30 @@
   }
 }
 
+.modal {
+  .duration-wrapper {
+    display: flex;
+    align-items: center;
+    .title {
+      margin-right: 16px;
+    }
+    .number {
+      margin-left: 16px;
+    }
+  }
+  @media all and (max-width: 1000px) {
+    .duration-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      .title {
+        margin-right: 0;
+      }
+      .number {
+        font-size: 12px;
+        margin: 10px 0 0 0;
+      }
+    }
+  }
+}
+
