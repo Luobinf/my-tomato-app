@@ -11,6 +11,7 @@ import Progress from '../Progress/Progress';
 //@ts-ignore
 import {connect} from 'react-redux';
 import {initTodos, updateTodos, editTodo} from '../../redux/actions/todos';
+import { DurationContext } from './duration-context';
 
 interface IndexProps {
   history: any,
@@ -22,8 +23,9 @@ interface IndexState {
   user: any,
   tomatoes: any[],
   modalVisible: boolean,
-  tomatoDuration: number
+  tomatoDuration: number,
 }
+
 
 class Home extends React.Component<IndexProps, IndexState> {
   private refresh: React.RefObject<any>;
@@ -34,7 +36,7 @@ class Home extends React.Component<IndexProps, IndexState> {
       user: {},
       tomatoes: [],
       modalVisible: false,
-      tomatoDuration: 25 * 60 * 1000
+      tomatoDuration: 25 * 60 * 1000,
     };
     this.loginOut = this.loginOut.bind(this);
     this.refresh = React.createRef();
@@ -141,7 +143,7 @@ class Home extends React.Component<IndexProps, IndexState> {
 
   handleTomatoDuration = (value: any) => {
     console.log(value);
-    if(typeof value === 'number' && value >= 10 && value <= 60) {
+    if(typeof value === 'number' && value >= 1 && value <= 60) {
       this.setState({
         tomatoDuration: value * 60 * 1000
       });
@@ -178,7 +180,7 @@ class Home extends React.Component<IndexProps, IndexState> {
         <div className="duration-wrapper">
           <div className="duration">
             <span className="title">设置番茄时长: </span>
-            <InputNumber min={10} max={60} defaultValue={25} onChange={this.handleTomatoDuration} />
+            <InputNumber min={1} max={60} defaultValue={25} onChange={this.handleTomatoDuration} />
           </div>
           <span className="number">请输入10 — 60之间的数字</span>
         </div>
@@ -227,11 +229,13 @@ class Home extends React.Component<IndexProps, IndexState> {
           </div>
         </header>
         <main className='home-main'>
-          <Tomatoes
-            tomatoes={this.state.tomatoes}
-            startTomato={this.startTomato}
-            updateTomatoes={this.updateTomatoes}
-          />
+          <DurationContext.Provider value={{duration: this.state.tomatoDuration}}>
+            <Tomatoes
+              tomatoes={this.state.tomatoes}
+              startTomato={this.startTomato}
+              updateTomatoes={this.updateTomatoes}
+            />
+          </DurationContext.Provider>
           <Todos/>
         </main>
         <Statistics tomatoes={this.state.tomatoes}/>

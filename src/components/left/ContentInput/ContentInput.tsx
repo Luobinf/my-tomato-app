@@ -106,9 +106,9 @@ class ContentInput extends React.Component<ContentInputProps, ContentInputState>
         </div>
       );
     } else {
-      //获取时间 如果现在时间减去创建时间大于duration时间，则。。。。。
+      //获取时间 如果现在时间减去创建时间大于duration时间，则......
       let createdAt = +new Date(unfinishedTomatoes.created_at);
-      let duration = +new Date(unfinishedTomatoes.duration);
+      let duration = +new Date(unfinishedTomatoes.duration) - 1000;  //显示时会有1s误差，这里减去1s的时间
       let nowTime = +new Date();
       if (nowTime - createdAt >= duration) {
         //任务已经完成了，否则任务没有完成

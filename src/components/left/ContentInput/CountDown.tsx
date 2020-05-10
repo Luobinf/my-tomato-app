@@ -1,6 +1,7 @@
 import React from 'react';
 import {format} from 'date-fns';
-import _ from 'lodash';
+import './CountDown.scss';
+import { DurationContext} from '../../Home/duration-context';
 
 interface CountDownProps {
   restTime: number,
@@ -8,7 +9,8 @@ interface CountDownProps {
 }
 
 interface CountDownState {
-  restTime: number
+  restTime: number,
+  duration?: number
 }
 
 let timerID: NodeJS.Timeout;
@@ -17,12 +19,13 @@ class CountDown extends React.Component<CountDownProps, CountDownState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      restTime: this.props.restTime
+      restTime: this.props.restTime,  //会有1s误差
+      duration: 25 * 60 *1000
     };
   }
 
   componentDidMount(): void {
-    console.log('剩余时间', this.props.restTime);
+    // console.log('剩余时间', this.props.restTime);
     timerID = setInterval(() => {
       if (this.state.restTime > 1000) {
         this.setState((state) => {
@@ -42,17 +45,31 @@ class CountDown extends React.Component<CountDownProps, CountDownState> {
 
   render() {
     let {restTime} = this.state;
-    let time = format(restTime, 'mm:ss');
+    console.log(2020)
+    console.log(new Date(restTime).getSeconds())
+    console.log(2020)
+    let time: string = format(restTime, 'mm:ss');
+    const seconds: number = new Date(restTime).getMinutes() * 60 + new Date(restTime).getSeconds();
     return (
-      <div className='countdown'>
-        {time}
-      </div>
+      <DurationContext.Consumer>
+        {
+          ( {duration}) => {
+            return (
+              <div className='countdown'>
+                <span className="text">{time}</span>
+                <div className="mask" style={{width: (1 - seconds * 1000 / duration ) * 100 + '%'}}/>
+              </div>
+            );
+          }
+        }
+      </DurationContext.Consumer>
     );
   }
 
   componentWillUnmount(): void {
     clearInterval(timerID);
   }
+
 }
 
 export default CountDown;

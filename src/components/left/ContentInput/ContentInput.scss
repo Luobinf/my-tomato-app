@@ -19,6 +19,7 @@
       transform: translate3d(50%,50%,0);
       background-color: white;
       cursor: pointer;
+      z-index: 15;
       svg {
         width: 18px;
         height: 18px;
@@ -34,13 +35,6 @@
         width: 16px;
         height: 16px;
       }
-    }
-    .countdown {
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: 1px solid rgb(204,204,204);
     }
   }
 }
