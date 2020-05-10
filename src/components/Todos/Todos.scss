@@ -9,14 +9,21 @@
               -1px -1px 3px rgba(0,0,0,0.1);
   .todoLists {
     padding-top: 16px;
+    .empty {
+      border-top: 1px solid #dddddd;
+      .ant-empty-image {
+        margin-top: 20px;
+      }
+    }
   }
   .ant-collapse .ant-collapse-item .ant-collapse-header {
     padding: 6px 16px 6px 40px;
   }
-  .task {
-
-  }
   .finishedTasks {
+    margin-top: 16px;
+  }
+  @media all and (max-width: 1000px) {
+    width: 100%;
     margin-top: 16px;
   }
 }

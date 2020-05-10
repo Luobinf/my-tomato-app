@@ -6,4 +6,7 @@ footer {
     display: flex;
     justify-content: space-between;
   }
+  @media all and (max-width: 1000px) {
+    padding-bottom: 10px;
+  }
 }

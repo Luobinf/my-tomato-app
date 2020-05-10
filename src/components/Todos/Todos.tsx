@@ -6,7 +6,7 @@ import axios from '../../config/axios';
 import TodosInput from './TodosInput';
 import TodoItem from './TodoItem';
 import './Todos.scss';
-import { Collapse } from 'antd';
+import { Collapse, Empty } from 'antd';
 
 const { Panel } = Collapse;
 
@@ -70,25 +70,27 @@ class Todos extends React.Component<any, TodosState> {
         <div className='todoLists'>
           <div className='task'>
             {
-              this.unCompletedTodos.map((item: any) => {
+              this.unCompletedTodos.length > 0 ? this.unCompletedTodos.map((item: any) => {
                 return (
                   <TodoItem key={item.id} {...item} descriptionSituation={'完成任务'} />
                 );
-              })
+              }) : <Empty className='empty' />
             }
           </div>
           <div>
-            <Collapse className='finishedTasks'>
-              <Panel header="最近完成的任务" key="1">
-                {
-                  this.completedTodos.map((item: any) => {
-                    return (
-                      <TodoItem key={item.id} {...item} descriptionSituation={'删除任务'} />
-                    );
-                  })
-                }
-              </Panel>
-            </Collapse>
+            {
+              this.completedTodos.length > 0 && <Collapse className='finishedTasks'>
+                <Panel header="最近完成的任务" key="1">
+                  {
+                    this.completedTodos.map((item: any) => {
+                      return (
+                        <TodoItem key={item.id} {...item} descriptionSituation={'删除任务'} />
+                      );
+                    })
+                  }
+                </Panel>
+              </Collapse>
+            }
           </div>
         </div>
       </div>

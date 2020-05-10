@@ -1,5 +1,5 @@
 import React from 'react';
-import {Collapse} from 'antd';
+import {Collapse, Empty} from 'antd';
 import {format} from 'date-fns';
 import './TaskList.scss';
 
@@ -54,11 +54,13 @@ class TaskList extends React.Component<TaskListProps> {
     }
     return (
       <div className='task-list'>
-        <Collapse defaultActiveKey='1'>
-          <Panel header="最近完成的番茄" key="1">
-            {tomatoesDOM}
-          </Panel>
-        </Collapse>
+        {
+          finishedTomatoes.length > 0 ?  <Collapse defaultActiveKey='1'>
+            <Panel header="最近完成的番茄" key="1">
+              {tomatoesDOM}
+            </Panel>
+          </Collapse> : <Empty className='empty' />
+        }
       </div>
     );
   }

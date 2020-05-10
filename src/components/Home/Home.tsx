@@ -104,7 +104,7 @@ class Home extends React.Component<IRouter,IndexState> {
   }
 
   render() {
-    console.log(9999999999999,this.state.tomatoes);
+    // console.log(9999999999999,this.state.tomatoes);
     const menu = (
       <Menu onClick={this.handleMenuClick}>
         <Menu.Item key="1">
