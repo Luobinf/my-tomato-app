@@ -1,5 +1,17 @@
 .todosInput {
+  position: relative;
   .input {
     height: 40px;
+  }
+  .enter {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translate3d(0,-50%,0);
+    cursor: pointer;
+    svg {
+      width: 16px;
+      height: 16px;
+    }
   }
 }

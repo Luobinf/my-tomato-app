@@ -1,10 +1,11 @@
 import React from 'react';
-import { Input } from 'antd';
+import {Input, Tooltip} from 'antd';
 // @ts-ignore
 import { connect } from 'react-redux';
 import { addTodo } from '../../redux/actions/todos';
 import axios from '../../config/axios';
 import './TodosInput.scss';
+import {EnterOutlined} from '@ant-design/icons/lib';
 
 interface TodosInputState {
   description: string
@@ -54,6 +55,9 @@ class TodosInput extends React.Component<TodosInputProps,TodosInputState> {
           onPressEnter={this.onPressEnter}
           className='input'
         />
+        <Tooltip placement="left" title='按回车键提交'>
+          <EnterOutlined className='enter'/>
+        </Tooltip>
       </div>
     )
   }
