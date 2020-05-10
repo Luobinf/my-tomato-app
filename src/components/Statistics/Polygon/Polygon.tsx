@@ -10,18 +10,18 @@ interface PolygonStates {
   data: any
 }
 
-class Polygon extends React.Component<PolygonProps> {
+class Polygon extends React.Component<PolygonProps,PolygonStates> {
   constructor(props: Readonly<PolygonProps>) {
     super(props);
   }
 
   point = () => {
     const dates = Object.keys(this.props.data).sort((a, b) => {
-      console.log(a);
-      console.log(b);
+      // console.log(a);
+      // console.log(b);
       return Date.parse(a) - Date.parse(b);
     });
-    console.log(dates);
+    // console.log(dates);
     const firstDay = dates[0];
     if (firstDay) {
       const lastDay = new Date().getTime();
@@ -30,7 +30,7 @@ class Polygon extends React.Component<PolygonProps> {
       let finishedY;
       const points = dates.map((date) => {
         const x = (Date.parse(date) - Date.parse(firstDay)) / range * 240;
-        console.log('x', x);
+        // console.log('x', x);
         finishedCount += this.props.data[date].length;
         const y = (1 - finishedCount / this.props.totalFinishedCount) * 60;
         finishedY = y;
@@ -44,7 +44,7 @@ class Polygon extends React.Component<PolygonProps> {
   };
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <svg className='polygon' height='60'>
         <polygon fill="rgba(215,78,78,0.1)" stroke="rgba(215,78,78,0.5)" strokeWidth="1" points={this.point()}/>

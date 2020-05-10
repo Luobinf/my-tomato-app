@@ -116,7 +116,7 @@ class ContentInput extends React.Component<ContentInputProps, ContentInputState>
         content = (
           <div className='countdown-wrapper'>
             <Input
-              placeholder='请输入刚刚完成的任务'
+              placeholder='刚刚完成了什么工作 ？'
               value={this.state.description}
               onChange={this.handleChange}
               onPressEnter={this.handlePressEnter}

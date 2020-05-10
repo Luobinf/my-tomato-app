@@ -1,3 +1,12 @@
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .home {
   max-width: 1000px;
   margin: 0 auto;
@@ -16,18 +25,29 @@
         align-items: center;
 
         .icon {
-          width: 32px;
-          height: 32px;
+          width: 48px;
+          height: 48px;
         }
 
         .title {
-          margin: 0 0 0 16px;
+          margin: 0 0 0 8px;
           font-weight: 700;
         }
       }
 
       .user {
         cursor: pointer;
+        .desc {
+          &.active {
+            display: none;
+          }
+        }
+        .refresh {
+          margin: 0 16px;
+          &.active {
+            animation: 3s linear spin infinite;
+          }
+        }
       }
     }
   }
@@ -50,3 +70,4 @@
     }
   }
 }
+
