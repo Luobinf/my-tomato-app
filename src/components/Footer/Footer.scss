@@ -5,6 +5,20 @@ footer {
   .content {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    a {
+      color: rgba(0,0,0,0.65);
+      margin-left: 16px;
+      .github {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+      }
+      .juejin {
+        width: 16px;
+        height: 16px;
+      }
+    }
   }
   @media all and (max-width: 1000px) {
     padding-bottom: 10px;
