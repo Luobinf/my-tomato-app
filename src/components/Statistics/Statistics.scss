@@ -1,0 +1,71 @@
+.statistics {
+  margin-top: 20px;
+
+  ul {
+    display: flex;
+    align-items: flex-start;
+
+    li {
+      cursor: pointer;
+      border: 1px solid #dddddd;
+      background: white;
+      transition: background 0.5s;
+
+      &.active {
+        background: rgb(244, 244, 244);
+      }
+
+      &:not(:last-child) {
+        border-right: 0;
+      }
+
+      .census {
+        display: flex;
+
+        .text {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 5px 10px;
+
+          .count {
+            color: rgb(102, 102, 102);
+            font-size: 14px;
+          }
+
+          .accumulate {
+            color: rgb(153, 153, 153);
+            font-size: 12px;
+          }
+
+          .total {
+            color: rgb(102, 102, 102);
+            font-size: 30px;
+            font-weight: 700;
+          }
+        }
+
+        .picture {
+          flex: 1;
+          display: flex;
+          align-items: flex-end;
+        }
+      }
+    }
+  }
+
+  @media all and (max-width: 1000px) {
+    width: 100%;
+    margin-top: 16px;
+    ul {
+      flex-direction: column;
+
+      li {
+        border-right: 1px solid #dddddd !important;
+        &:not(:last-child) {
+          border-bottom: 0;
+        }
+      }
+    }
+  }
+}
