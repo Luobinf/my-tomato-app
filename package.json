@@ -73,6 +73,8 @@
     "semver": "6.3.0",
     "style-loader": "0.23.1",
     "styled-components": "^5.1.0",
+    "svg-transform-loader": "^2.0.13",
+    "svgo-loader": "^2.2.1",
     "terser-webpack-plugin": "2.3.5",
     "ts-pnp": "1.1.6",
     "typescript": "~3.7.2",
@@ -104,6 +106,7 @@
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.0",
+    "@types/webpack-env": "^1.15.2",
     "svg-sprite-loader": "^5.0.0"
   },
   "jest": {
