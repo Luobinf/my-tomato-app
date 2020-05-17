@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.scss';
-import Home from './components/Home/Home';
+import User from './components/User/User';
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
-
+import Home from './components/Home/Home';
 import {
   BrowserRouter as Router,
   Route
@@ -14,8 +14,9 @@ class App extends React.Component {
     return (
       <Router>
         <Route path="/" exact={true} component={Home}/>
+        <Route path="/user" exact={true} component={User}/>
         <Route path="/login" exact={true} component={Login}/>
-        <Route path="/signUp" exact={true} component={SignUp}/>
+        <Route path="/register" exact={true} component={SignUp}/>
       </Router>
     );
   }

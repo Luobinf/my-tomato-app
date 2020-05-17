@@ -1,7 +1,22 @@
 @import '~antd/dist/antd.css';
 
-html,body {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  height: auto;
+}
+body {
   width: 100%;
   height: auto;
   background-color: #fdfdfd;
+}
+
+
+a {
+  text-decoration: none;
 }

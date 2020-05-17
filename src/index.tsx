@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 // @ts-ignore
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import './index.scss';
 import App from './App';
+import './index.scss';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
