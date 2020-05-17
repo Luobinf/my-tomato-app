@@ -1,7 +1,7 @@
 import React from 'react';
 import {format} from 'date-fns';
 import './CountDown.scss';
-import { DurationContext} from '../../Home/duration-context';
+import { DurationContext} from '../../User/duration-context';
 
 interface CountDownProps {
   restTime: number,
@@ -13,9 +13,9 @@ interface CountDownState {
   duration?: number
 }
 
-let timerID: NodeJS.Timeout;
 
 class CountDown extends React.Component<CountDownProps, CountDownState> {
+  private timerID: number | undefined;
   constructor(props: any) {
     super(props);
     this.state = {
@@ -26,7 +26,7 @@ class CountDown extends React.Component<CountDownProps, CountDownState> {
 
   componentDidMount(): void {
     // console.log('剩余时间', this.props.restTime);
-    timerID = setInterval(() => {
+    this.timerID = setInterval(() => {
       if (this.state.restTime > 1000) {
         this.setState((state) => {
           return {
@@ -38,10 +38,15 @@ class CountDown extends React.Component<CountDownProps, CountDownState> {
           restTime: 0
         });
         this.props.onFinish();
-        clearInterval(timerID);
+        clearInterval(this.timerID);
       }
     }, 1000);
   }
+
+  componentWillUnmount(): void {
+    clearInterval(this.timerID);
+  }
+
 
   render() {
     let {restTime} = this.state;
@@ -65,11 +70,6 @@ class CountDown extends React.Component<CountDownProps, CountDownState> {
       </DurationContext.Consumer>
     );
   }
-
-  componentWillUnmount(): void {
-    clearInterval(timerID);
-  }
-
 }
 
 export default CountDown;

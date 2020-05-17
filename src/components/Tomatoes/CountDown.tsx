@@ -11,9 +11,11 @@ interface CountDownStates {
   countDown: number
 }
 
-let timerID: NodeJS.Timeout;
+// let timerID: NodeJS.Timeout | undefined;
+
 
 class CountDown extends React.Component<CountDownProps, CountDownStates> {
+  private timerID:  number | undefined;
   constructor(props: Readonly<CountDownProps>) {
     super(props);
     this.state = {
@@ -21,8 +23,8 @@ class CountDown extends React.Component<CountDownProps, CountDownStates> {
     };
   }
 
-  componentDidMount(): void {
-    timerID = setInterval(
+  componentDidMount(){
+    this.timerID  = setInterval(
       () => {
         let time = this.state.countDown;
         this.setState({
@@ -31,14 +33,14 @@ class CountDown extends React.Component<CountDownProps, CountDownStates> {
         if (time < 1000) {
           //告诉父组件，完成倒计时
           this.props.onFinish();
-          clearInterval(timerID);
+          clearInterval(this.timerID);
         }
       }
       , 1000);
   }
 
-  componentWillUnmount(): void {
-    clearInterval(timerID);
+  componentWillUnmount() {
+    clearInterval(this.timerID);
   }
 
   render() {

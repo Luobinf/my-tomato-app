@@ -2,7 +2,7 @@ import React from 'react';
 import axios from '../../config/axios';
 import {Menu, Dropdown, Tooltip, Modal, InputNumber, message} from 'antd';
 import {DownOutlined, UserOutlined} from '@ant-design/icons';
-import './Home.scss';
+import './User.scss';
 import Todos from '../Todos/Todos';
 import Tomatoes from '../left/Tomatoes/Tomatoes';
 import Statistics from '../Statistics/Statistics';
@@ -27,7 +27,7 @@ interface IndexState {
 }
 
 
-class Home extends React.Component<IndexProps, IndexState> {
+class User extends React.Component<IndexProps, IndexState> {
   private refresh: React.RefObject<any>;
   private desc: React.RefObject<any>;
   constructor(props: any) {
@@ -264,4 +264,4 @@ const mapDispatchToProps = {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(User);
