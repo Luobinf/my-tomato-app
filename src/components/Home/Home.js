@@ -3,7 +3,6 @@ import styled, {keyframes} from "styled-components";
 import { Link } from "react-router-dom";
 import Icon from '../Icon/Icon';
 
-
 const rotato = keyframes`
   0% {
     transform: scale(1);
@@ -48,8 +47,10 @@ const Header = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    .logo {
-      height: 40px;
+    .icon {
+      height: 50px;
+      width: 50px;
+      fill: white;
     }
     .nav-wrapper {
       .navigation .nav-box .navigation-menu {
@@ -147,6 +148,14 @@ const Main = styled.main`
 `;
 
 class Home  extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  handleSwitchRouter = (address) => {
+    this.props.history.push(address);
+  }
+
   render() {
     return (
       <HomeWrapper className="home-wrapper">
@@ -182,8 +191,8 @@ class Home  extends React.Component {
             </h1>
           </div>
           <div className="btn-wrapper">
-            <button>Login</button>
-            <button>Register</button>
+            <button onClick={() => this.handleSwitchRouter('login')}>Login</button>
+            <button onClick={() => this.handleSwitchRouter('register')}>Register</button>
           </div>
         </Main>
       </HomeWrapper>

@@ -1,6 +1,4 @@
 import React from 'react';
-// import tomato from '../../icons/tomato.svg';
-// console.log(tomato);
 
 interface Props {
   name: string
