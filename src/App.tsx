@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 import User from './components/User/User';
-import Login from './components/Log/Login';
+import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
 import Home from './components/Home/Home';
 import {
