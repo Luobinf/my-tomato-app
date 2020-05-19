@@ -12,6 +12,7 @@ import Progress from '../Progress/Progress';
 import {connect} from 'react-redux';
 import {initTodos, updateTodos, editTodo} from '../../redux/actions/todos';
 import { DurationContext } from './duration-context';
+import Icon from '../Icon/Icon';
 
 interface IndexProps {
   history: any,
@@ -127,7 +128,7 @@ class User extends React.Component<IndexProps, IndexState> {
   };
 
   handleOk = () => {
-    console.log(55555555);
+    // console.log(55555555);
     this.setState({
       modalVisible: false
     });
@@ -135,14 +136,14 @@ class User extends React.Component<IndexProps, IndexState> {
   };
 
   handleCancel = () => {
-    console.log(11);
+    // console.log(11);
     this.setState({
       modalVisible: false
     });
   };
 
   handleTomatoDuration = (value: any) => {
-    console.log(value);
+    // console.log(value);
     if(typeof value === 'number' && value >= 1 && value <= 60) {
       this.setState({
         tomatoDuration: value * 60 * 1000
@@ -162,7 +163,6 @@ class User extends React.Component<IndexProps, IndexState> {
     }).catch((e) => {
       throw new Error(e);
     });
-    // console.log(this.refresh.current);
   }
 
   render() {
@@ -203,9 +203,9 @@ class User extends React.Component<IndexProps, IndexState> {
       <div className='user'>
         <span className="desc" ref={this.desc}>正在同步数据</span>
         <Tooltip placement="topLeft" title='同步数据'>
-          <svg className="icon refresh active" aria-hidden="true" ref={this.refresh}>
-            <use xlinkHref="#icon-shuaxin"/>
-          </svg>
+          <span  className="icon refresh active" ref={this.refresh}>
+            <Icon name="refresh"/>
+          </span>
         </Tooltip>
         <Dropdown overlay={menu}>
           <span>
@@ -220,9 +220,7 @@ class User extends React.Component<IndexProps, IndexState> {
         <header>
           <div className='nav'>
             <div className='logo'>
-              <svg className="icon" aria-hidden="true">
-                <use xlinkHref="#icon-fanqie"/>
-              </svg>
+              <Icon name="user_tomato" />
               <h2 className='title'>番茄时间</h2>
             </div>
             {dropDown}
