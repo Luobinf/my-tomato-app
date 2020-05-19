@@ -21,6 +21,7 @@ instance.interceptors.request.use(function (config) {
   return config;
 }, function (error) {
   console.error(error);
+  console.log('我错了');
   return Promise.reject(error);
 });
 
@@ -38,6 +39,7 @@ instance.interceptors.response.use(function (response) {
     //组件外如何跳转路由（无刷新）
     history.push('/login');
   }
+  // console.log('error',error.response);
   return Promise.reject(error);
 });
 
