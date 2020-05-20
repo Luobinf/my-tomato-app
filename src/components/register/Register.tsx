@@ -74,6 +74,27 @@ const Wrapper = styled.div`
       }
     }
   }
+   @media all and (max-width: 1000px) {
+      .logo {
+          display: flex;
+          align-items: center;
+        }
+      .login-header {
+        .navbar {
+          .nav-wrapper {
+             .navigation .nav-box .navigation-menu {
+                display: flex;
+                > li {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  margin-right: 0;
+                }
+             }
+          }
+        }
+      }
+   } 
 `;
 
 const Main = styled.main`
@@ -85,7 +106,6 @@ const Main = styled.main`
   position: relative;
   z-index: 10;
   .card {
-   //background-color: #999999;
     padding: 0 20px 20px 20px;
     background: white;
     border-radius: 4px;
@@ -223,6 +243,31 @@ const Main = styled.main`
       }
     }
   }
+  @media all and (min-width: 376px) and (max-width: 1000px) {
+    padding-bottom: 0;
+    padding-top: 0;
+    .card {
+      .card-head {
+         margin-top: -50px;
+      }
+    }
+  }
+  @media all and (min-width: 322px) and (max-width: 375px) {
+    .card {
+      .card-head {
+         margin-top: -20px;
+      }
+    }
+  }
+  @media all and (max-width: 321px) {
+    padding-bottom: 0;
+    .card {
+      .card-head {
+         padding: 20px 75px;
+         margin-top: -30px;
+      }
+    }
+  }
 `;
 
 interface UserState {
@@ -327,7 +372,7 @@ class Register extends React.Component<any,UserState>{
       this.props.history.push('/user'); //跳转到用户页
     } catch (e) {
       // console.log(e.response);
-      // console.log('error',e.response.data.errors.account[0]);  这里会有bug，当网络出现问题时
+      // console.log('error',e.response.data.errors.account[0]);  这里会有bug，当网络出现问题时（后续自己写后端时修复）
       const err = e.response.data.errors.account[0];
       if(err === 'has already been taken') {
         message.error('用户名已存在！');

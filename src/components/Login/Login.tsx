@@ -20,58 +20,84 @@ const Wrapper = styled.div`
     background: black;
     opacity: 0.5;
    }
-  .login-header {
+   .login-header {
     padding: 20px;
     position: fixed;
     z-index: 100;
     left: 0;
     top: 0;
     right: 0;
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .logo {
-      color: white;
-      font-weight: 700;
-      font-size: 14px;
-      .icon {
-        height: 50px;
-        width: 50px;
-        fill: white;
-        margin-right: 8px;
-      }
-    }
-    .nav-wrapper {
-      .navigation .nav-box .navigation-menu {
-        > li {
-          display: inline-block;
-          padding: 0 15px;
-          margin-right: 40px;
-          cursor: pointer;
-          transition: all 0.5s;
-          &:hover {
-            background: rgba(200,200,200,0.2);
-          }
-          > .icon {
-            width: 1em;
-            height: 1em;
-            background: white;
-            margin-right: 4px;
-          }
-          > a {
-              padding: 10px 0;
-              display: inline-block;
-              color: white;
-              cursor: pointer;
-              font-size: 14px;
-              font-weight: lighter;                          
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .logo {
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            .icon {
+              height: 50px;
+              width: 50px;
+              fill: white;
+              margin-right: 8px;
             }
-          }         
+            > span {
+              white-space: nowrap;
+            }
+        }
+        .nav-wrapper {
+           .navigation .nav-box .navigation-menu {
+              > li {
+                  display: inline-block;
+                  padding: 0 15px;
+                  margin-right: 40px;
+                  cursor: pointer;
+                  transition: all 0.5s;
+                  &:hover {
+                    background: rgba(200,200,200,0.2);
+                  }
+                  > .icon {
+                      width: 1em;
+                      height: 1em;
+                      background: white;
+                      margin-right: 4px;
+                    }
+                  > a {
+                      padding: 10px 0;
+                      display: inline-block;
+                      color: white;
+                      cursor: pointer;
+                      font-size: 14px;
+                      font-weight: lighter;
+                      white-space: nowrap;                          
+                    }
+                  }         
+                }
+              }
+            }
+          }
+   @media all and (max-width: 1000px) {
+      .logo {
+          display: flex;
+          align-items: center;
+        }
+      .login-header {
+        //padding: 10px 20px;
+        .navbar {
+          .nav-wrapper {
+             .navigation .nav-box .navigation-menu {
+                display: flex;
+                > li {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  margin-right: 0;
+                }
+             }
+          }
         }
       }
-    }
-  }
+   } 
 `;
 
 const Main = styled.main`
@@ -219,6 +245,23 @@ const Main = styled.main`
       justify-content: space-between;
     }
   }
+  @media all and (min-width: 321px) and (max-width: 1000px) {
+    padding-bottom: 0;
+    padding-top: 0;
+    .card {
+      .card-head {
+         margin-top: -30px;
+      }
+    }
+  }
+  @media all and (max-width: 321px) {
+    padding-bottom: 0;
+    .card {
+      .card-head {
+         padding: 20px 75px;
+      }
+    }
+  }
 `;
 
 interface LoginProps {
@@ -322,7 +365,7 @@ class Login extends React.Component<LoginProps,LoginState>{
           <div className="navbar">
             <div className="logo">
               <Icon name="tomato" />
-              番茄时间
+              <span>番茄时间</span>
             </div>
             <div className="nav-wrapper">
               <nav className="navigation">
